@@ -1,0 +1,7 @@
+VeroUser Changelog
+
+Version 
+-------
+    0.4.0 : Initial coding release. Pretty straight forward so 
+            as soon as it gets some use I'm fine with moving to
+            1.0

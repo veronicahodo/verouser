@@ -4,7 +4,7 @@
   A CRUD based module for me to use to do my various
   basic database stuff.
 
-  Version 0.4.0 - last updated 2023-09-22
+  Version 0.5.0 - last updated 2023-09-22
 */
 import * as mysql from "mysql2/promise";
 
@@ -27,7 +27,7 @@ class VeroCrud {
     this.maxResults = 20000; // Change as needed. If you have larger record sets increase this
   }
 
-  private insertString(data: any[]) {
+  private insertString(data: any) {
     // This builds the string of fields and values necessary
     // for SQL
     // TODO: I know we should trust our code to be used properly
@@ -35,27 +35,23 @@ class VeroCrud {
     // on these fields
     let fields: string[] = [];
     let values: any[] = [];
-    for (const item of data) {
-      Object.entries(item).forEach(([key, value]) => {
-        fields.push(key);
-        values.push(value);
-      });
-    }
+    Object.entries(data).forEach(([key, value]) => {
+      fields.push(key);
+      values.push(value);
+    });
     return `(${fields.join(",")}) VALUES ('${values.join("','")}')`;
   }
 
-  private updateString(data: any[]) {
+  private updateString(data: any) {
     // This builds the update string
     // TODO: same security concerns as insert
     let fields: string[] = [];
     let values: any[] = [];
     let returnStr: string = "";
-    for (const item of data) {
-      Object.entries(item).forEach(([key, value]) => {
-        fields.push(key);
-        values.push(value);
-      });
-    }
+    Object.entries(data).forEach(([key, value]) => {
+      fields.push(key);
+      values.push(value);
+    });
     for (var i = 0; i < fields.length; i++) {
       if (i > 0) {
         returnStr += ", ";
